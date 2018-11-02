@@ -54,10 +54,8 @@ def vertrektijden(stationnaam): #het venster met de vertrektijden
     newwin.configure(bg='#ffc917')
     newwin.pack_propagate(0)
     newwin.geometry("800x600")
-
     display = Label(newwin, bg='#ffc917', fg="black", text="Dit zijn de vertrektijden op het gekozen station:")
     display.pack()
-
     topFrame = Frame(newwin)
     topFrame.pack()
 
@@ -74,7 +72,7 @@ def vertrektijden(stationnaam): #het venster met de vertrektijden
         vertrektijd = vertrek['VertrekTijd']
         vertrektijd = vertrektijd[11:16] #alleen de 11 tot 16 letter van de string (de string begint met jaar > maand > dag, dat hebben we niet nodig, alleen uren en minuten.
 
-        display = Label(newwin, bg="blue", fg="white", text='Om ' + vertrektijd + ' vertrekt een trein naar ' + eindbestemming)
+        display = Label(newwin, bg="blue", fg="white", text='Om ' + vertrektijd + ' vertrekt een trein naar ' + eindbestemming) #wat er uiteindelijk wordt geprint op het scherm.
         display.pack(fill=BOTH, expand=1,)
 
     toolbar = Frame(newwin, bg='#003082')
