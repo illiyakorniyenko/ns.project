@@ -24,7 +24,7 @@ def vertrektijdenWin(): #Deze functie is ons venster waar je de naam van het sta
     logo.image = photo
     logo.pack()
 
-    toolbar = Frame(newwin, bg='#003082') #onderste strook.
+    toolbar = Frame(newwin, bg='#003082') #onderste strook (engelse en nederlandse knop).
 
     nederlandsbutton = Button(toolbar, text='Nederlands', bg='#003082', fg='Black')
     photo = PhotoImage(file='nederland.png')
@@ -144,6 +144,6 @@ mastervisalabel = Label(toolbar, image=kpa, compound=TOP)
 mastervisalabel.pack(side=RIGHT, padx=2, pady=2)
 
 
-toolbar.pack(side=BOTTOM, fill=X)
+toolbar.pack(side=BOTTOM, fill=X) #de toolbar strook plakken we aan de onderkant van het venster.
 
-root.mainloop()
+root.mainloop() #we sluiten de code af.
