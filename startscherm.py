@@ -3,11 +3,11 @@ import requests
 import xmltodict
 
 
-def vertrektijdenWin():
+def vertrektijdenWin(): #Deze functie is ons venster waar je de naam van het station in kan voeren.
     newwin = Toplevel(root)
-    newwin.configure(bg='#ffc917')
+    newwin.configure(bg='#ffc917') #achtergrondkleur
     newwin.pack_propagate(0)
-    newwin.geometry("800x600")
+    newwin.geometry("800x600") #venstergrootte
 
     display = Label(newwin, text="Voer de naam van uw station in:", bg='#ffc917')
     display.pack()
@@ -15,16 +15,16 @@ def vertrektijdenWin():
     topFrame = Frame(newwin)
     topFrame.pack()
 
-    stationnaam = Entry(newwin, bg='white', fg='black',)
+    stationnaam = Entry(newwin, bg='white', fg='black',) #input strook voor het aangeven van de stationnaam.
     stationnaam.pack(side=TOP)
     stationnaam.bind("<Return>", vertrektijden)
 
-    photo = PhotoImage(file="ns.startscherm.png")
+    photo = PhotoImage(file="ns.startscherm.png") #afbeelding ns logo.
     logo = Label(newwin, image=photo)
     logo.image = photo
     logo.pack()
 
-    toolbar = Frame(newwin, bg='#003082')
+    toolbar = Frame(newwin, bg='#003082') #onderste strook.
 
     nederlandsbutton = Button(toolbar, text='Nederlands', bg='#003082', fg='Black')
     photo = PhotoImage(file='nederland.png')
@@ -48,11 +48,7 @@ def vertrektijdenWin():
     newwin.mainloop()
 
 
-
-
-
-
-def vertrektijden(stationnaam):
+def vertrektijden(stationnaam): #het venster met de vertrektijden
 
     newwin = Toplevel(root)
     newwin.configure(bg='#ffc917')
@@ -65,18 +61,18 @@ def vertrektijden(stationnaam):
     topFrame = Frame(newwin)
     topFrame.pack()
 
-    auth_details = ('illiya.korniyenko@student.hu.nl', 'Fn716EyB5F0QictFJSUdSoe9DKk2m0DNx54tdJTFmhb1gPNXaBhtsg')
-    api_url = 'http://webservices.ns.nl/ns-api-avt?station='+ stationnaam.widget.get()
+    auth_details = ('illiya.korniyenko@student.hu.nl', 'Fn716EyB5F0QictFJSUdSoe9DKk2m0DNx54tdJTFmhb1gPNXaBhtsg') #inloggegevens voor de api.
+    api_url = 'http://webservices.ns.nl/ns-api-avt?station='+ stationnaam.widget.get() #hier de link naar de vertrekkende tijden, het laatste deel van de link wordt aangevuld door wat de gebruiker in het vorig venster heeft ingevuld.
 
     response = requests.get(api_url, auth=auth_details)
     vertrekXML = xmltodict.parse(response.text)
 
 
-    for vertrek in vertrekXML['ActueleVertrekTijden']['VertrekkendeTrein']:
+    for vertrek in vertrekXML['ActueleVertrekTijden']['VertrekkendeTrein']: #uit het XML bestand pakken we alleen de tijden en de treinen, de rest hebben we niet nodig.
         eindbestemming = vertrek['EindBestemming']
 
         vertrektijd = vertrek['VertrekTijd']
-        vertrektijd = vertrektijd[11:16]
+        vertrektijd = vertrektijd[11:16] #alleen de 11 tot 16 letter van de string (de string begint met jaar > maand > dag, dat hebben we niet nodig, alleen uren en minuten.
 
         display = Label(newwin, bg="blue", fg="white", text='Om ' + vertrektijd + ' vertrekt een trein naar ' + eindbestemming)
         display.pack(fill=BOTH, expand=1,)
@@ -116,7 +112,7 @@ label.pack()
 topFrame = Frame(root)
 topFrame.pack()
 
-button = Button(topFrame, text='Actuele vertrektijden', bg='Black', fg='Black', height=3, width=17, command =vertrektijdenWin)
+button = Button(topFrame, text='Actuele vertrektijden', bg='Black', fg='Black', height=3, width=17, command =vertrektijdenWin) #Dit is de knop die naar het vertrektijden venster doorverwijst.
 button2 = Button(topFrame, text='Kopen los kaart', bg='#003082', fg='Black', height=3, width=17)
 button3 = Button(topFrame, text='Kopen OV-chipkaart', bg='#003082', fg='Black', height=3, width=17)
 button4 = Button(topFrame, text='Ik wil naar het buitenland', bg='#003082', fg='Black', height=3, width=18)
