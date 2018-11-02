@@ -117,7 +117,7 @@ button2 = Button(topFrame, text='Kopen los kaart', bg='#003082', fg='Black', hei
 button3 = Button(topFrame, text='Kopen OV-chipkaart', bg='#003082', fg='Black', height=3, width=17)
 button4 = Button(topFrame, text='Ik wil naar het buitenland', bg='#003082', fg='Black', height=3, width=18)
 
-button.pack(side=LEFT)
+button.pack(side=LEFT) #alle knoppen plaatsen we horizontaal achter elkaar.
 button2.pack(side=LEFT)
 button3.pack(side=LEFT)
 button4.pack(side=LEFT)
